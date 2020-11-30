@@ -1,0 +1,124 @@
+class Math {
+    static Array twoToThe;
+    Math() {
+        twoToThe = new Array(16);
+        twoToThe[0] = 1;
+        twoToThe[1] = 2;
+        twoToThe[2] = 4;
+        twoToThe[3] = 8;
+        twoToThe[4] = 16;
+        twoToThe[5] = 32;
+        twoToThe[6] = 64;
+        twoToThe[7] = 128;
+        twoToThe[8] = 256;
+        twoToThe[9] = 512;
+        twoToThe[10] = 1024;
+        twoToThe[11] = 2048;
+        twoToThe[12] = 4096;
+        twoToThe[13] = 8192;
+        twoToThe[14] = 16384;
+        twoToThe[15] = 32767;
+        return;
+    }
+
+    bool bit (int x, int i) {
+        int j, shiftedX;
+        if (i == 15) {
+            return (x < 0);
+        }
+
+        j = 14;
+        if (Math.bit(x,15)) {
+            shiftedX = x + 32767 + 1;
+        } else {
+            shiftedX = x;
+        }
+        while (j > i) {
+            if (shiftedX > (twoToThe[j] - 1)) {
+                shiftedX = shiftedX - twoToThe[j];
+            }
+            j = j - 1;
+        }
+
+        return (shiftedX > (twoToThe[j] - 1));
+    }
+
+    int abs(int x) {
+        return (Math.max(x, -x));
+    }
+    int multiply(int x, int y) {
+        int i, sum, shiftedX;
+        sum = 0;
+        shiftedX = x;
+        i = 0;
+        while (i<16) {
+            if (Math.bit(y,i)) {
+                sum = sum + shiftedX;
+            }
+            shiftedX = shiftedX + shiftedX;
+            i = i + 1;
+        }
+        return sum;
+    }
+
+    int divide(int x, int y) {
+        int absX, absY, q;
+        int negDiv;
+        absX = Math.abs(x);
+        absY = Math.abs(y);
+        if (absX == x) {
+            if (absY == y) {
+                negDiv = 1;
+            } else {
+                negDiv = -1;
+            }
+        } else {
+            if (absY == y) {
+                negDiv = -1;
+            } else {
+                negDiv = 1;
+            }
+        }
+
+        if (absY>absX || absY<0) {
+            return 0;
+        }
+        q = Math.divide(absX, 2*absY);
+        if ((absX - (2 * absY * q)) < absY) {
+            return negDiv * 2 * q;
+        } else {
+            return negDiv * ((2 * q) + 1);
+        }
+    }
+    int sqrt(int x) {
+        int j, y;
+        y = 0;
+        j = 7;
+        if (x == 32767) {
+            return 181;
+        }
+        while (j > -1) {
+            if ( ((y+twoToThe[j]) * (y+twoToThe[j])) < (x+1) ) {
+                y = y + twoToThe[j];
+            }
+            j = j - 1;
+        }
+        return y;
+    }
+
+    int max(int a, int b) {
+        if (a > b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    int min(int a, int b) {
+        if (a < b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+}

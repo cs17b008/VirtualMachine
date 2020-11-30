@@ -1,0 +1,32 @@
+class Fraction{
+    /** 
+    Example usage of Fraction ADT in main function
+    Fraction a,b,c;
+    a = new Fraction(2,3);
+    b = new Fraction(1,5);
+    c = a.plus(b); //computes c = a + b;
+    c.printFraction() //prints "13/15"
+    */
+    Fraction(int n, int d){
+        numerator = n;
+        denominator = d;
+        return this;
+    }
+    int getNumerator(){
+        return numerator;
+    }
+    int getDenominator(){
+        return denominator;
+    }
+    Fraction plus(Fraction other){
+        int sum;
+        sum = (numerator*other.getDenominator())+(other.getNumerator()*denominator);
+        return new Fraction(sum, denominator*other.getDenominator());
+    }
+    void printFraction(){
+        Output.printInt(numerator);
+        Output.printString("/");
+        Output.printInt(denominator);
+        return;
+    }
+}
