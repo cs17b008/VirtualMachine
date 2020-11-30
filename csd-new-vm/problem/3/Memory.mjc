@@ -1,0 +1,184 @@
+ class Memory {
+    /**
+    * Memory operations library.
+    */
+    static Array memory;
+    static Array freeList;
+    static Array memoryBottom;
+
+    static int heapBottom;
+    static int heapBase;
+
+    static int LENGTH;//the segment's length
+    static int NEXT;//pointer to the next segment in the list
+
+    static int ALLOC_LENGTH; //the alloc block's length
+
+    /** Initializes memory parameters. */
+     void init() {
+        
+         heapBase = 1234;
+         heapBottom = 2468;
+
+         memory = 0; //memory base
+         freeList = heapBase; //heap base
+         LENGTH = 0;
+         NEXT = 1;
+         freeList[LENGTH] = heapBottom - heapBase;//length of heap
+         freeList[NEXT] = null; 
+
+         ALLOC_LENGTH = -1;//block[-1] store the length of alloc block
+
+        return;
+    }
+
+    /** Returns the value of the main memory at the given address. */
+     int peek(int address) {
+        return memory[address];
+    }
+
+    /** Sets the value of the main memory at this address
+     *  to the given value. */
+     void poke(int address, int value) {
+         memory[address] = value;
+        return;
+    }
+
+    /**
+     * start from freeList
+     * keep finding next free block
+     * if blockSize < bestSize and >= size then set it as bestSize
+     * until next is null
+     * Three cases:
+     * -block found
+     * -block not found, all blocks are full
+     * -freeList is the block
+     */
+     Array bestFit(int size){
+         Array curBlock, bestBlock;
+         int bestSize,curSize;
+
+         bestBlock = null;//init null
+         bestSize = heapBottom - heapBase;
+         curBlock = freeList;
+
+        if(curBlock[NEXT] == null){
+            return curBlock;
+        }
+
+        while(curBlock){
+
+             curSize = curBlock[LENGTH] - 1; //alloced block only need one header
+
+            if(curSize > size && (curSize < bestSize)){
+
+                 bestBlock = curBlock;
+                 bestSize = curSize;
+
+            }
+
+             curBlock = curBlock[NEXT];
+        }
+
+        return bestBlock;
+    }
+
+    /** finds and allocates from the heap a memory block of the 
+     *  specified size and returns a reference to its base address. */
+     int alloc(int size) {
+
+         Array foundBlock,nextBlock,result;
+
+         foundBlock = Memory.bestFit(size);
+         result = foundBlock + 1;
+
+        if(foundBlock){
+            //alloc this block, check if only need to alloc part of this block or the whole block 
+            if(foundBlock[LENGTH] > (size + 3)){
+                 nextBlock = foundBlock + size + 1;
+                 nextBlock[NEXT] = foundBlock[NEXT];
+                 nextBlock[LENGTH] = foundBlock[LENGTH] - size - 1;
+                 result[ALLOC_LENGTH] = size + 1;
+                 freeList = nextBlock;
+            }else{
+                //alloc the whole block
+                 nextBlock = foundBlock[NEXT];
+                 result[ALLOC_LENGTH] = foundBlock[LENGTH];
+            }
+
+             foundBlock = nextBlock;
+
+        }
+
+        return result;
+    }
+
+    /** De-allocates the given object and frees its space. */
+     void deAlloc(int object) {
+         Array preBlock,nextBlock;
+         int size;
+
+        //if there exists pre free block, then link this block to pre block
+        //else  this block be free list head and link to freelist
+            //if pre block clings to this block,join two block together
+            //else link together
+
+         size = object[ALLOC_LENGTH];
+         object = object - 1;//must consider block[-1]
+         preBlock = Memory.findPreFree(object);
+
+        if(preBlock == null){
+
+             object[LENGTH] = size;
+             object[NEXT] = freeList;
+             freeList = object;
+
+        }else{
+
+            if((preBlock + preBlock[LENGTH]) == object){
+
+                 preBlock[LENGTH] = preBlock[LENGTH] + size;
+                 object = preBlock;
+
+            }else{
+
+                 object[LENGTH] = size;
+                 object[NEXT] = preBlock[NEXT];
+                 preBlock[NEXT] = object;
+
+            }
+
+        }
+
+        //after linking, check if this block can be joined to next block
+        if((object + object[LENGTH]) == object[NEXT]){
+             nextBlock = object[NEXT];
+             object[LENGTH] = object[LENGTH] + nextBlock[LENGTH];
+             object[NEXT] = nextBlock[NEXT];
+        }
+
+        return;
+    }    
+
+    /*
+     * Find previous free block
+     * helper  for deAlloc
+     */
+     Array findPreFree(int object){
+         Array preBlock;
+
+        //no freeBlock
+        if(freeList > object){
+            return null;
+        }
+
+         preBlock = freeList;
+        //preBlock.next != null && preBlock.next < object
+        while(preBlock[NEXT] && (preBlock[NEXT] < object)){
+             preBlock = preBlock[NEXT];
+        }
+
+        return preBlock;
+
+    }
+}
