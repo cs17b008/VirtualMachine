@@ -1,0 +1,46 @@
+class Substring {
+void main()
+{
+    s1 = new String(7);
+    s1 = s1.appendChar(97);
+    s1 = s1.appendChar(98);
+    s1 = s1.appendChar(99);
+    s1 = s1.appendChar(100);
+    s1 = s1.appendChar(101);
+	s1 = s1.appendChar(102);
+    s1 = s1.appendChar(103);        //string-1: abcdefg
+    l1 = s1.length();
+
+    s2 = new String(3);
+    s2 = s2.appendChar(99);
+    s2 = s2.appendChar(100);
+    s2 = s2.appendChar(101);        //string-2: cde
+    l2 = s2.length();
+
+    int i, j;
+    i = 0;
+    j = 0;
+    
+    while(i < l1)
+    {
+        if(s1.charAt(i) == s2.charAt(j))
+        {
+            j = j + 1;
+        }
+        else
+        {
+            j = 0;
+        }
+        i = i + 1;
+    }
+    if(j == l2)
+        {
+        Output.printString("Substring found at position ");
+        Output.print(i - j + 1);
+        }
+    else
+        {
+        Output.printString("Substring not found");
+        }
+}
+}

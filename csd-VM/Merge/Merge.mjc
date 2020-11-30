@@ -1,0 +1,109 @@
+// demonstrating merge sort.
+class Merge {
+void merge(Array arr, int l, int m, int r)
+{
+	int n1;
+    n1 = m - l + 1;
+	int n2;
+    n2 = r - m;
+
+	// Temp arrays
+    Array L;
+    L = new Array(n1);
+    Array R;
+    R = new Array(n2);
+
+	// Copy data to temp arrays L[] and R[]
+    int i, j;
+    i = 0;
+    j = 0;
+
+    while(i<n1)
+    {
+		L[i] = arr[l + i];
+        i = i + 1;
+    }
+    while(j<n2)
+    {
+        R[j] = arr[m + 1 + j];
+        j = j + 1;
+    }
+	// Merge the temp arrays back into arr[l..r]
+
+	int i; 
+    i = 0;
+
+	int j;
+    j = 0;
+
+	int k;
+    k = l;
+
+	while (i < n1 && j < n2) {
+		if (L[i] < R[j] || L[i] == R[j]) {
+			arr[k] = L[i];
+			i = i + 1;
+		}
+		else {
+			arr[k] = R[j];
+			j = j + 1;
+		}
+		k = k + 1;
+	}
+
+	// Remaining elements
+
+	while (i < n1) {
+		arr[k] = L[i];
+		i = i + 1;
+		k = k + 1;
+	}
+
+	while (j < n2) {
+		arr[k] = R[j];
+		j = j + 1;
+		k = k + 1;
+	}
+}
+
+void mergeSort(Array arr,int l,int r){
+	if(l>r || l==r){
+		return;
+	}
+	int m;
+    m  = (l+r-1)/2;
+	Merge.mergeSort(arr,l,m);
+	Merge.mergeSort(arr,m+1,r);
+	Merge.merge(arr,l,m,r);
+}
+
+void printArray(Array A, int size)
+{
+    int i;
+    i = 0;
+    while(i<size)
+    {
+        Output.printInt(A[i]);
+        Output.printString(" ");
+        i = i + 1;
+    }
+	Output.println();
+}
+
+void main()
+{
+	Array arr;
+	arr = new Array(6); // 2, 1, 5, 4, 3, 6
+    arr[0] = 2;
+    arr[1] = 1;
+    arr[2] = 5;
+    arr[3] = 4;
+    arr[4] = 3;
+    arr[5] = 6;
+
+	Merge.mergeSort(arr, 0, 5);
+
+	Output.printString("Sorted array is: ");
+    Merge.printArray(arr, 6);
+}
+}
