@@ -1,0 +1,110 @@
+class String {
+    int len, maxLength;
+    Array table;
+
+    String (int maxLen) {
+        table = new Array(maxLen);
+        len = 0;
+        maxLength = maxLen;
+        return this;
+    }
+    int length() {
+        return len;
+    }
+
+    char charAt(int j) {
+        if (j < len) {
+            return table[j];
+        } else {
+            return 0;
+        }
+    }
+
+    void setCharAt(int j, char c) {
+        if (j < len) {
+            table[j] = c;
+            return;
+        } else {
+            return;
+        }
+    }
+
+    String appendChar(char c) {
+        if (len < maxLength) {
+            table[len] = c;
+            len = len + 1;
+        }
+        return this;
+    }
+
+    void eraseLastChar() {
+        if (len > 0) {
+            table[len - 1] = 0;
+            len = len - 1;
+        }
+        return;
+    }
+    int intValue() {
+        int cursor;
+        bool negInt;
+        int value;
+
+        cursor = 0;
+        negInt = false;
+        value = 0;
+        if (table[cursor] == 45) {
+            negInt = true;
+            cursor = cursor + 1;
+        }
+
+        while(cursor < len && table[cursor] > 47 && table[cursor] < 58 ) {
+            value = value * 10;
+            value = value + table[cursor]-48;
+            cursor = cursor + 1;
+        }
+
+        if (negInt) {
+            return -value;
+        } else {
+            return value;
+        }
+    }
+
+    void setInt(int val) {
+        int digit;
+        int c;
+        String res;
+
+        res = new String(5);
+        len = 0;
+        if (val < 0) {
+            appendChar(45);
+            val = -val;
+        }
+
+        while (val > 0) {
+            digit = val - ((val/10)*10);
+            c = digit + 48;
+            res.appendChar(c);
+            val = val/10;
+        }
+        c = 0;
+        while ( c < res.length() ) {
+            appendChar(res.charAt(res.length() - c - 1));
+            c = c +1;
+        }
+        return;
+    }
+
+    char newLine() {
+        return 128;
+    }
+
+    char backSpace() {
+        return 129;
+    }
+
+    char doubleQuote() {
+        return 34;
+    }
+}
