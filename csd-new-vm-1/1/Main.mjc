@@ -1,0 +1,74 @@
+class Main
+{
+    void main(){
+        int a_r, a_c, b_r, b_c;
+        a_r = 5;
+        a_c = 3;
+        b_r = 3;
+        b_c = 5;
+        Array a,b,c;
+        a = new Array(a_r);
+        b = new Array(b_r);
+        int i,j;
+        i=0;
+        j=0;
+        while(i<a_r){
+            a[i] = new Array(a_c);
+            while(j<a_c){
+                col = a[i];
+                col[j] = 1*i+j;
+                j = j+1;
+            }
+            j = 0;
+            i = i+1;
+        }
+        i=0;
+        j=0;
+        while(i<b_r){
+            b[i] = new Array(b_c);
+            while(j<b_c){
+                col = b[i];
+                col[j] = 2*i+j;
+                j = j+1;
+            }
+            j = 0;
+            i = i+1;
+        }
+        if(a_c == b_r){
+            c = new Array(a_r);
+            i=0;
+            j=0;
+            k=0;
+            while(i<a_r){
+                c[i] = new Array(b_c);
+                while(j<b_c){
+                    col = c[i];
+                    while(k<a_c){
+                        col_a = a[i];
+                        col_b = b[k];
+                        col[j] = col[j]+(col_a[k]*col_b[j]);
+                        k = k+1;
+                    }
+                    k=0;
+                    j = j+1;
+                }
+                j=0;
+                i = i+1;
+            }
+            while(i<a_r){
+                col = c[i];
+                while(j<b_c){
+                    Output.printInt(col[j]);
+                    Output.printString(" ");
+                    j = j+1;
+                }
+                Output.printString("\n");
+                j=0;
+                i = i+1;
+            }
+        }
+        else{
+            Output.printString("Matrix multiplication not compatible! ");
+        }
+    }
+}
