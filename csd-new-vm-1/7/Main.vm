@@ -1,0 +1,19 @@
+function Main.main 4
+push argument 0
+pop pointer 0
+push constant 2
+push constant 3
+call Fraction.newobj 2
+pop local 0
+push constant 1
+push constant 5
+call Fraction.newobj 2
+pop local 1
+push local 0
+push local 1
+call Fraction.plus 2
+pop local 2
+push local 2
+call Fraction.printFraction 1
+pop temp 0
+
