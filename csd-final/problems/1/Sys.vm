@@ -1,0 +1,78 @@
+function Sys.init 1
+push argument 0
+pop pointer 0
+call Memory.init 0
+pop temp 0
+call Math.init 0
+pop temp 0
+call Output.init 0
+pop temp 0
+call Main.main 0
+pop temp 0
+push constant 0
+return
+
+function Sys.halt 1
+push argument 0
+pop pointer 0
+label SysL1
+push constant 1
+neg
+not
+if-goto SysL2
+goto SysL1
+label SysL2
+push constant 0
+return
+
+function Sys.wait 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label SysL3
+push local 0
+push argument 1
+push constant 5
+mul
+lt
+not
+if-goto SysL4
+push local 0
+push constant 1
+add
+pop local 0
+goto SysL3
+label SysL4
+push constant 0
+return
+
+function Sys.error 1
+push argument 0
+pop pointer 0
+push constant 4
+call String.newobj 1
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 60
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push argument 1
+call Output.printInt 1
+pop temp 0
+push constant 1
+call String.newobj 1
+push constant 62
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+call Sys.halt 0
+pop temp 0
+push constant 0
+return
+

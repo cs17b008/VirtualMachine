@@ -1,0 +1,409 @@
+function Math.init 1
+push argument 0
+pop pointer 0
+push constant 16
+call Array.newobj 1
+pop static 0
+push constant 1
+push static 0
+push constant 0
+add
+pop pointer 1
+pop that 0
+push constant 2
+push static 0
+push constant 1
+add
+pop pointer 1
+pop that 0
+push constant 4
+push static 0
+push constant 2
+add
+pop pointer 1
+pop that 0
+push constant 8
+push static 0
+push constant 3
+add
+pop pointer 1
+pop that 0
+push constant 16
+push static 0
+push constant 4
+add
+pop pointer 1
+pop that 0
+push constant 32
+push static 0
+push constant 5
+add
+pop pointer 1
+pop that 0
+push constant 64
+push static 0
+push constant 6
+add
+pop pointer 1
+pop that 0
+push constant 128
+push static 0
+push constant 7
+add
+pop pointer 1
+pop that 0
+push constant 256
+push static 0
+push constant 8
+add
+pop pointer 1
+pop that 0
+push constant 512
+push static 0
+push constant 9
+add
+pop pointer 1
+pop that 0
+push constant 1024
+push static 0
+push constant 10
+add
+pop pointer 1
+pop that 0
+push constant 2048
+push static 0
+push constant 11
+add
+pop pointer 1
+pop that 0
+push constant 4096
+push static 0
+push constant 12
+add
+pop pointer 1
+pop that 0
+push constant 8192
+push static 0
+push constant 13
+add
+pop pointer 1
+pop that 0
+push constant 16384
+push static 0
+push constant 14
+add
+pop pointer 1
+pop that 0
+push constant 32767
+push static 0
+push constant 15
+add
+pop pointer 1
+pop that 0
+push constant 0
+return
+
+function Math.bit 3
+push argument 0
+pop pointer 0
+push argument 2
+push constant 15
+eq
+not
+if-goto MathL1
+push argument 1
+push constant 0
+lt
+return
+label MathL1
+push constant 14
+pop local 0
+push argument 1
+push constant 15
+call Math.bit 2
+not
+if-goto MathL2
+push argument 1
+push constant 32767
+add
+push constant 1
+add
+pop local 1
+goto MathL3
+label MathL2
+push argument 1
+pop local 1
+label MathL3
+label MathL4
+push local 0
+push argument 2
+gt
+not
+if-goto MathL5
+push local 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 1
+sub
+gt
+not
+if-goto MathL6
+push local 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+sub
+pop local 1
+label MathL6
+push local 0
+push constant 1
+sub
+pop local 0
+goto MathL4
+label MathL5
+push local 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 1
+sub
+gt
+return
+
+function Math.abs 1
+push argument 0
+pop pointer 0
+push argument 1
+push argument 1
+neg
+call Math.max 2
+return
+
+function Math.multiply 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push argument 1
+pop local 2
+push constant 0
+pop local 0
+label MathL7
+push local 0
+push constant 16
+lt
+not
+if-goto MathL8
+push argument 2
+push local 0
+call Math.bit 2
+not
+if-goto MathL9
+push local 1
+push local 2
+add
+pop local 1
+label MathL9
+push local 2
+push local 2
+add
+pop local 2
+push local 0
+push constant 1
+add
+pop local 0
+goto MathL7
+label MathL8
+push local 1
+return
+
+function Math.divide 5
+push argument 0
+pop pointer 0
+push argument 1
+call Math.abs 1
+pop local 0
+push argument 2
+call Math.abs 1
+pop local 1
+push local 0
+push argument 1
+eq
+not
+if-goto MathL10
+push local 1
+push argument 2
+eq
+not
+if-goto MathL12
+push constant 1
+pop local 3
+goto MathL13
+label MathL12
+push constant 1
+neg
+pop local 3
+label MathL13
+goto MathL11
+label MathL10
+push local 1
+push argument 2
+eq
+not
+if-goto MathL14
+push constant 1
+neg
+pop local 3
+goto MathL15
+label MathL14
+push constant 1
+pop local 3
+label MathL15
+label MathL11
+push local 1
+push local 0
+gt
+push local 1
+push constant 0
+lt
+or
+not
+if-goto MathL16
+push constant 0
+return
+label MathL16
+push local 0
+push constant 2
+push local 1
+mul
+call Math.divide 2
+pop local 2
+push local 0
+push constant 2
+push local 1
+mul
+push local 2
+mul
+sub
+push local 1
+lt
+not
+if-goto MathL17
+push local 3
+push constant 2
+mul
+push local 2
+mul
+return
+goto MathL18
+label MathL17
+push local 3
+push constant 2
+push local 2
+mul
+push constant 1
+add
+mul
+return
+label MathL18
+
+function Math.sqrt 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push constant 7
+pop local 0
+push argument 1
+push constant 32767
+eq
+not
+if-goto MathL19
+push constant 181
+return
+label MathL19
+label MathL20
+push local 0
+push constant 1
+neg
+gt
+not
+if-goto MathL21
+push local 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+add
+push local 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+add
+mul
+push argument 1
+push constant 1
+add
+lt
+not
+if-goto MathL22
+push local 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+add
+pop local 1
+label MathL22
+push local 0
+push constant 1
+sub
+pop local 0
+goto MathL20
+label MathL21
+push local 1
+return
+
+function Math.max 1
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+gt
+not
+if-goto MathL23
+push argument 1
+return
+goto MathL24
+label MathL23
+push argument 2
+return
+label MathL24
+
+function Math.min 1
+push argument 0
+pop pointer 0
+push argument 1
+push argument 2
+lt
+not
+if-goto MathL25
+push argument 1
+return
+goto MathL26
+label MathL25
+push argument 2
+return
+label MathL26
+

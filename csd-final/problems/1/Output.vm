@@ -1,0 +1,59 @@
+function Output.init 1
+push argument 0
+pop pointer 0
+push constant 9234
+pop static 0
+
+function Output.printInt 1
+push argument 0
+pop pointer 0
+push static 0
+push argument 1
+call Memory.poke 2
+pop temp 0
+push static 0
+push constant 1
+add
+pop static 0
+
+function Output.printChar 1
+push argument 0
+pop pointer 0
+push static 0
+push argument 1
+call Memory.poke 2
+pop temp 0
+push static 0
+push constant 1
+add
+pop static 0
+
+function Output.printString 1
+push argument 0
+pop pointer 0
+push static 0
+push argument 1
+call Memory.poke 2
+pop temp 0
+push static 0
+push constant 1
+add
+pop static 0
+
+function Output.println 1
+push argument 0
+pop pointer 0
+push static 0
+push constant 2
+call String.newobj 1
+push constant 92
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+call Memory.poke 2
+pop temp 0
+push static 0
+push constant 1
+add
+pop static 0
+
