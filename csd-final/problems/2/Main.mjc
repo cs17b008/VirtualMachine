@@ -1,0 +1,57 @@
+class Main{
+    void insert(int data, List v){
+        List l;
+        l = List(data,null);
+        if(v==null){
+            v = l;
+            return;
+        }
+        List current;
+        current = v;
+        while(!(current.getNext()==null)){
+            current = current.getNext();
+        }
+        List temp;
+        temp = current.getNext();
+        temp = l;
+    }
+    void update_data(List head, int old, int newd){
+        // int pos = 0;
+        if(head == null){
+            return;
+        }
+        List current;
+        current = head;
+        while(!(current.getNext()==null)){
+            if(current.getData() == old){
+                int temp;
+                temp = current.getData();
+                temp = newd;
+                return;
+            }
+            current = current.getNext();
+            // pos++;
+        }
+    }
+    void display(List v){
+        List current;
+        current = v;
+        while(!(current==null)){
+            Output.printInt(current.getData());
+            Output.printString(" ");
+            current = current.getNext();
+        }
+        Output.printString("\n");
+    }
+    void main(){
+        List v;
+        v = new List(5,null);
+        // v = List.new_l(5,null);
+        v = new List(3,new List(2,v)); //Linked list created (v->3->2->5->null); insert at start;
+        insert(7,v); //insert node at end;
+        display(v);  // print list
+        update_data(v,3,30); // update node
+        v.dispose(); //delete node
+        return;
+    }
+}
