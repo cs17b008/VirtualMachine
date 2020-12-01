@@ -1,0 +1,41 @@
+/**
+ * A library that supports various program execution services.
+ */
+class Sys
+{
+    /** Performs all the initializations required by the OS. */
+    void init() {
+        Memory.init();
+        Math.init();
+        Output.init();
+        Main.main();
+        return;
+    }
+
+    /** Halts the program execution. */
+    void halt() {
+        while (true) {}
+        return;
+    }
+
+    /** Waits approximately duration milliseconds and returns.  */
+    void wait(int duration) {
+        int delay;
+        delay = 0;
+        while (delay < duration*5) {
+            delay = delay + 1;
+        }
+        return;
+    }
+
+    /** Displays the given error code in the form "ERR<errorCode>",
+     *  and halts the program's execution. */
+    void error(int errorCode) {
+        Output.printString("ERR<");
+        Output.printInt(errorCode);
+        Output.printString(">");
+
+        Sys.halt();
+        return;
+    }
+}

@@ -1,0 +1,22 @@
+class Output{
+    static int print_space;
+    void init(){
+        print_space = 9234;
+    }
+    void printInt(int n){
+        Memory.poke(print_space,n);
+        print_space = print_space + 1;
+    }
+    void printChar(char ch){
+        Memory.poke(print_space,ch);
+        print_space = print_space + 1;
+    }
+    void printString(String s){
+        Memory.poke(print_space,s);
+        print_space = print_space + 1;
+    }
+    void println(){
+        Memory.poke(print_space,"\n");
+        print_space = print_space + 1;
+    }
+}

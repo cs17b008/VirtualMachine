@@ -1,0 +1,25 @@
+class Main
+{
+    static int n1, n2, n3;
+    void printFib(int count){
+        if(count>0){
+            n3 = n1 + n2;
+            n1 = n2;
+            n2 = n3;
+            Output.printString(n3);
+            printFib(count-1);
+        }
+        return;
+    }
+    void main(){
+        n1 = 0;
+        n2 = 1;
+        n3 = 0;
+        int count;
+        count = 10;
+        Output.printString(n1);
+        Output.printString(n2);
+        printFib(count-2);
+        return;
+    }
+}

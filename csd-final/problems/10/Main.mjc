@@ -1,0 +1,36 @@
+class Main{
+
+    /** Perform various memory manipulations. */
+    void main() {
+        int temp;
+        Array a, b, c;
+        
+        Memory.poke(8000, 333);       // RAM[8000] = 333
+        temp = Memory.peek(8000);
+        Memory.poke(8001, temp + 1);  // RAM[8001] = 334
+        
+        a = new Array(3);            // uses Memory.alloc
+        a[2] = 222;
+        Memory.poke(8002, a[2]);      // RAM[8002] = 222
+        
+        b = new Array(3);
+        b[1] = a[2] - 100;
+        Memory.poke(8003, b[1]);       // RAM[8003] = 122
+        
+        c = new Array(500);
+        c[499] = a[2] - b[1];
+        Memory.poke(8004, c[499]);     // RAM[8004] = 100
+        
+        a.dispose();                   // uses Memory.deAlloc
+        b.dispose();
+        
+        b = new Array(3);
+        b[0] = c[499] - 90;
+        Memory.poke(8005, b[0]);       // RAM[8005] = 10
+        
+        c.dispose();
+        b.dispose();
+        
+        return;
+    }
+}

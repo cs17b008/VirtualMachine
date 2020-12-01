@@ -1,0 +1,11 @@
+class Main
+{
+    void main()
+    {
+    Fraction a,b,c;
+    a = new Fraction(2,3);
+    b = new Fraction(1,5);
+    c = a.plus(b); //computes c = a + b;
+    c.printFraction(); //prints "13/15"
+    }
+}
