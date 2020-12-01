@@ -1,0 +1,69 @@
+/** Test program for the OS String class. */
+class Main {
+    void main() {
+        String s;
+        String i;
+
+        s = new String(6); // capacity 6, make sure that length 5 is displayed
+        s = s.appendChar(97);
+        s = s.appendChar(98);
+        s = s.appendChar(99);
+        s = s.appendChar(100);
+        s = s.appendChar(101);
+        Output.printString("new,appendChar: ");
+        Output.printString(s);                // new, appendChar: abcde
+        Output.println();
+    
+        i = new String(6);
+        i.setInt(12345);
+        Output.printString("setInt: ");
+        Output.printString(i);                // setInt: 12345
+        Output.println();
+
+        i.setInt(-32767);
+        Output.printString("setInt: ");
+        Output.printString(i);                // setInt: -32767
+        Output.println();
+        
+        Output.printString("length: ");
+        Output.printInt(s.length());          // length: 5
+        Output.println();
+        
+        Output.printString("charAt[2]: ");
+        Output.printInt(s.charAt(2));         // charAt[2]: 99
+        Output.println();
+        
+        s.setCharAt(2, 45);
+        Output.printString("setCharAt(2,'-'): ");     
+        Output.printString(s);                // setCharAt(2,'-'): ab-de
+        Output.println();
+        
+        s.eraseLastChar();        
+        Output.printString("eraseLastChar: ");     
+        Output.printString(s);                // eraseLastChar: ab-d
+        Output.println();
+        
+        s = "456";
+        Output.printString("intValue: ");
+        Output.printInt(s.intValue());        // intValue: 456
+        Output.println();
+        
+        s = "-321";
+        Output.printString("intValue: ");
+        Output.printInt(s.intValue());        // intValue: -321
+        Output.println();
+        
+        Output.printString("backSpace: ");
+        Output.printInt(String.backSpace());  // backSpace: 129
+        Output.println();
+        
+        Output.printString("doubleQuote: ");
+        Output.printInt(String.doubleQuote());// doubleQuote: 34
+        Output.println();
+        
+        Output.printString("newLine: ");
+        Output.printInt(new StringLine());    // newLine: 128
+        Output.println();
+        return;
+    }
+}
