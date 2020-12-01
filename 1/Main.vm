@@ -1,0 +1,361 @@
+function Main.main 10
+push argument 0
+pop pointer 0
+push constant 5
+pop local 0
+push constant 3
+pop local 1
+push constant 3
+pop local 2
+push constant 5
+pop local 3
+push local 0
+call Array.newobj 1
+pop local 4
+push local 2
+call Array.newobj 1
+pop local 5
+push constant 0
+pop local 7
+push constant 0
+pop local 8
+label MainL1
+push local 7
+push local 0
+lt
+not
+if-goto MainL2
+push local 1
+call Array.newobj 1
+push local 4
+push local 7
+add
+pop pointer 1
+pop that 0
+label MainL3
+push local 8
+push local 1
+lt
+not
+if-goto MainL4
+push local 4
+push local 7
+add
+pop pointer 1
+push that 0
+pop argument 0
+push constant 1
+push local 7
+mul
+push local 8
+add
+push argument 0
+push local 8
+add
+pop pointer 1
+pop that 0
+push local 8
+push constant 1
+add
+pop local 8
+goto MainL3
+label MainL4
+push constant 0
+pop local 8
+push local 7
+push constant 1
+add
+pop local 7
+goto MainL1
+label MainL2
+push constant 0
+pop local 7
+push constant 0
+pop local 8
+label MainL5
+push local 7
+push local 2
+lt
+not
+if-goto MainL6
+push local 3
+call Array.newobj 1
+push local 5
+push local 7
+add
+pop pointer 1
+pop that 0
+label MainL7
+push local 8
+push local 3
+lt
+not
+if-goto MainL8
+push local 5
+push local 7
+add
+pop pointer 1
+push that 0
+pop argument 0
+push constant 2
+push local 7
+mul
+push local 8
+add
+push argument 0
+push local 8
+add
+pop pointer 1
+pop that 0
+push local 8
+push constant 1
+add
+pop local 8
+goto MainL7
+label MainL8
+push constant 0
+pop local 8
+push local 7
+push constant 1
+add
+pop local 7
+goto MainL5
+label MainL6
+push local 1
+push local 2
+eq
+not
+if-goto MainL9
+push local 0
+call Array.newobj 1
+pop local 6
+push constant 0
+pop local 7
+push constant 0
+pop local 8
+push constant 0
+pop argument 0
+label MainL11
+push local 7
+push local 0
+lt
+not
+if-goto MainL12
+push local 3
+call Array.newobj 1
+push local 6
+push local 7
+add
+pop pointer 1
+pop that 0
+label MainL13
+push local 8
+push local 3
+lt
+not
+if-goto MainL14
+push local 6
+push local 7
+add
+pop pointer 1
+push that 0
+pop argument 0
+label MainL15
+push argument 0
+push local 1
+lt
+not
+if-goto MainL16
+push local 4
+push local 7
+add
+pop pointer 1
+push that 0
+pop argument 0
+push local 5
+push argument 0
+add
+pop pointer 1
+push that 0
+pop argument 0
+push argument 0
+push local 8
+add
+pop pointer 1
+push that 0
+push argument 0
+push argument 0
+add
+pop pointer 1
+push that 0
+push argument 0
+push local 8
+add
+pop pointer 1
+push that 0
+mul
+add
+push argument 0
+push local 8
+add
+pop pointer 1
+pop that 0
+push argument 0
+push constant 1
+add
+pop argument 0
+goto MainL15
+label MainL16
+push constant 0
+pop argument 0
+push local 8
+push constant 1
+add
+pop local 8
+goto MainL13
+label MainL14
+push constant 0
+pop local 8
+push local 7
+push constant 1
+add
+pop local 7
+goto MainL11
+label MainL12
+label MainL17
+push local 7
+push local 0
+lt
+not
+if-goto MainL18
+push local 6
+push local 7
+add
+pop pointer 1
+push that 0
+pop argument 0
+label MainL19
+push local 8
+push local 3
+lt
+not
+if-goto MainL20
+push argument 0
+push local 8
+add
+pop pointer 1
+push that 0
+call Output.printInt 1
+pop temp 0
+push constant 1
+call String.newobj 1
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push local 8
+push constant 1
+add
+pop local 8
+goto MainL19
+label MainL20
+push constant 2
+call String.newobj 1
+push constant 92
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+pop local 8
+push local 7
+push constant 1
+add
+pop local 7
+goto MainL17
+label MainL18
+goto MainL10
+label MainL9
+push constant 38
+call String.newobj 1
+push constant 77
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 120
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 98
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label MainL10
+
