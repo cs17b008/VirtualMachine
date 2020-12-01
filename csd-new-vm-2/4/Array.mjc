@@ -1,0 +1,15 @@
+/**
+ * Represents an array.
+ */
+class Array
+{
+    static Array newobj(int size) {
+        return Memory.alloc(size);
+    }
+
+    /** Deletes/deallocates this array. */
+    void dispose() {
+        Memory.deAlloc(this);
+        return;
+    }
+}

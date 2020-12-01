@@ -1,0 +1,36 @@
+class List{
+	/** sample usage:
+		List v;
+		v = List.new_l(5, null); ----> v->5->null
+		v = List.new_l(2, List.new(3,v)); ----> v->2->3->5->null
+	*/
+	int data;
+	List next;
+	//constructor to create new list 
+	List new_l(int d, List n){
+		data = d;
+		next = n;
+		return this;
+	}
+	//method to dispose the list recursively
+	// void update(List node){
+    //     if(next == null){
+    //         if(this == node){
+    //             this.data = node.data;
+    //         }
+    //         return;
+    //     }
+    //     if(this == node){
+    //         this.data = node.data;
+    //     }
+    //     next.update(node);
+	// }
+	void dispose(){
+		if(next == null){
+            Memory.deAlloc(this);
+		    return;
+		}
+		next.dispose();
+	}
+	//add any required functions
+}
